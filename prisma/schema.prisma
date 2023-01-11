@@ -7,17 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  password  String
-  Track     Track[]
+model Pedido {
+  id                   Int      @id @default(autoincrement())
+  numeroPedido         String
+  codBarrasEtiq        String
+  volume               String
+  totalVolume          String
+  codigoTransportadora String
+  dataDoPedidoPrevisto DateTime
+  tipoDePedido         String
+  rota                 String
+  conferencia          String
+  Track                Track[]
 }
 
 model Track {
-  id      Int     @id @default(autoincrement())
-  lido    Boolean @default(false)
-  id_user Int
-  User    User    @relation(fields: [id_user], references: [id])
+  id        Int     @id @default(autoincrement())
+  lido      Boolean @default(false)
+  id_pedido Int
+  Pedido    Pedido  @relation(fields: [id_pedido], references: [id])
 }

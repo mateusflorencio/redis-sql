@@ -6,7 +6,7 @@ const main = async () => {
   setInterval(async () => {
     const track = await prisma.track.findMany({
       where: { lido: false },
-      include: { User: true },
+      include: { Pedido: true },
     })
     if (track.length > 0) {
       for await (const t of track) {
@@ -16,8 +16,9 @@ const main = async () => {
         })
       }
     }
-
+    console.log("----------------------------------------------------------")
     console.log("Track: ", track)
+    console.log("Tamanho: ", track.length)
   }, 20000)
 }
 
